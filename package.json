@@ -1,7 +1,7 @@
 {
-  "scripts": {
-    "build": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify"
-  },
+"scripts": {
+  "build": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify"
+},
   "allowScripts": {
     "tailwindcss@4.3.3": true,
     "@parcel/watcher@2.5.1": true
