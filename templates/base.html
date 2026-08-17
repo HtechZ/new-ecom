@@ -16,7 +16,7 @@
 </head>
 <body>
     <nav>
-        <a class="header-logo-link" href="/"><img style="width: 18em;" src="/media/zlshop header logo.png" alt="ZLShop logo"></a>
+        <a class="header-logo-link" href="/"><img style="width: 18em;" src="{% static "images/zl-shop-header-logo.png" %} alt="ZLShop logo"></a>
         <div class="nav-shorcuts">
             {% if user.is_authenticated %}
                 <p class="shorcut">Hello {{ request.user }}</p>
