@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{% block content %}
+  <main class="flex main-cart-div justify-between">
+    {% if not order %}
+      <div class="flex flex-col items-center mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" height="500px" viewBox="0 -960 960 960" width="500px" fill="#000000"><path d="M261-120q-24.75 0-42.37-17.63Q201-155.25 201-180v-570h-41v-60h188v-30h264v30h188v60h-41v570q0 24-18 42t-42 18H261Zm438-630H261v570h438v-570ZM367-266h60v-399h-60v399Zm166 0h60v-399h-60v399ZM261-750v570-570Z"/></svg>
+      <p class="font-bold text-5xl">There is nothing in your shopping cart</p>
+      </div>
+    {% else %}
+      <div class="border-2 border-gray-500/80 w-[60vw] rounded-md">
+        {% for order in order_item %}
+        <div class="flex items-center gap-5 p-2 justify-between">
+          <div class="flex flex-row items-center">
+          <img class="select-none object-contain w-35 h-35 mr-4" src="{{ order.item.image.url }}" alt="">
+          <div class="flex flex-col">
+            <div class="flex flex-row gap-x-5">
+              <p class="font-semibold text-xl">{{ order.item.name }}</p>
+            </div>
+            {% if order.paid == False %}
+            <div><p class="text-red-600 font-semibold text-xl">Status: Not paid</p></div>
+            {% else %}
+            <div><p class="text-green-600 font-semibold text-xl">Status: Paid</p></div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+        <div class="flex flex-row items-center gap-x-3 mr-10">
+          <form action="/cart/" method="post">{% csrf_token %}<button name="delete-item" value="{{ order.item.name }}" class="flex cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></button></form>
+          <div class="flex flex-row border-2 border-gray-500 rounded-sm gap-x-3 items-center justify-between py-0.5">
+            <form action="/cart/" method="post">{% csrf_token %}<button name="minus-one" value="{{ order.item.name }}" class="text-xl cursor-pointer ml-3 mr-7">-</button></form>
+            <p>{{ order.order_count }}</p>
+            <form action="/cart/" method="post">{% csrf_token %}<button name="plus-one" value="{{ order.item.name }}" class="text-xl cursor-pointer mr-3 ml-7 ">+</button></form>
+          </div>
+        </div>
+          <p class="font-semibold text-xl text-gray-400">{{ order.item.price }}$</p>
+          <p class="font-semibold text-xl">{{ order.order_price }}$</p>
+          </div>
+        </div>
+        {% if last_item != None and order != last_item %}
+          <hr>
+        {% endif %}
+        {% endfor %}
+        
+      </div>
+      <div class="relative flex flex-col mr-10 border-2 border-gray-500/80 w-[25vw] h-[30vh] rounded-md">
+        <h2 class="font-bold text-2xl m-2 text-gray-500">Full price: {{ order.full_price }}$</h2>
+        <hr class="border-gray-500">
+        <h1 class="font-bold text-[1.65rem] m-2">Full price (with TAX): {{ full_price_with_tax }}$</h1>
+        <form class="absolute bottom-0 mb-5 ml-5 justify-center items-center" action="/cart/" method="post">{% csrf_token %}<button class="justify-center items-center bg-purple-800 hover:bg-purple-900 transition-all duration-200 cursor-pointer text-white p-2 rounded-md"><svg class="inline" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg>Payment</button></form>
+      </div>
+
+
+
+
+    {% endif %}
+  </main>
+{% endblock %}

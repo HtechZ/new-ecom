@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}ZLShop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        {% comment %} @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap'); {% endcomment %}
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="header-logo-link" href="/"><img style="width: 18em;" src="{% static "images/zlshop-header-logo.png" %}" alt="ZLShop logo"></a>
+        <div class="nav-shorcuts">
+            {% if user.is_authenticated %}
+                <p class="shorcut">Hello {{ request.user }}</p>
+            {% endif %}
+            <a class="shorcut" href="/">Home</a>
+            <a class="shorcut" href="/cart">Cart</a>
+            <a class="shorcut" href="#">Categories</a>
+            <a class="shorcut" href="/users/logout/">Logout</a>
+            <a class="shorcut" href="/users/login/">Login</a>
+            <a class="shorcut" href="/users/register/">Register</a>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
