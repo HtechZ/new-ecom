@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 import cloudinary
 import cloudinary_storage
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,9 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-djeot#5ub)60@_vkxf15k^8ipiu6my2e3re$$2dw0a)@24x9bm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
+
 
 
 # Application definition
@@ -39,12 +42,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cloudinary',
     'cloudinary_storage',
+    'cloudinary',
     'users',
     'products',
     'orders'
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'gc45ct8q',
+    'API_KEY': '696153599191992',
+    'API_SECRET': 'o7SRy4ie1nHdYHqyxgiHI558GWM'
+}
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,6 +98,16 @@ DATABASES = {
     }
 }
 
+STORAGES = {
+    "default": {
+        "BACKEND":"cloudinary_storage.storage.MediaCloudinaryStorage"
+        },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
@@ -124,10 +145,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Email
@@ -139,17 +160,3 @@ MAILERS = {
     },
 }
 
-STORAGES = {
-    "default": {
-        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'gc45ct8q',
-    'API_KEY': '696153599191992',
-    'API_SECRET': 'o7SRy4ie1nHdYHqyxgiHI558GWM'
-}
