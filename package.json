@@ -1,13 +1,11 @@
+
+
 {
-"scripts": {
-  "build": "npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify"
-},
-  "allowScripts": {
-    "tailwindcss@4.3.3": true,
-    "@parcel/watcher@2.5.1": true
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --minify"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "tailwindcss": "^4.3.3"
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
   }
 }
