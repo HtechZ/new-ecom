@@ -1,12 +1,13 @@
 {
-  "dependencies": {
-    "@tailwindcss/cli": "^4.3.3",
-    "tailwindcss": "^4.3.3"
-  },
   "scripts": {
     "build": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify"
   },
   "allowScripts": {
-    "tailwindcss@4.3.3": true
+    "tailwindcss@4.3.3": true,
+    "@parcel/watcher@2.5.1": true
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
   }
 }
